@@ -29,7 +29,7 @@ const App: React.FC = () => {
       const params = new URLSearchParams(window.location.search);
       const reportId = params.get('id');
 
-      if (path === '/report' && reportId) {
+      if (path === '/ai-visibility/report' && reportId) {
         setLoading(true);
         try {
           const res = await api.getReport(reportId);
