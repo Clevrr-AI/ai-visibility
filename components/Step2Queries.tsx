@@ -90,7 +90,7 @@ const Step2Queries: React.FC<Props> = ({ initialQueries, onAnalysisStart, loadin
 
   return (
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="bg-white rounded-3xl shadow-2xl shadow-indigo-100 border border-gray-100 overflow-hidden">
+      <div className="bg-white rounded-3xl mt-20 shadow-2xl shadow-indigo-100 border border-gray-100 overflow-hidden">
         <div className="p-8 md:p-12">
           <div className="mb-10 text-center">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-green-50 text-green-600 rounded-full text-[10px] font-black mb-4 uppercase tracking-widest">

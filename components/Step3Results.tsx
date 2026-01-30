@@ -96,7 +96,7 @@ const Step3Results: React.FC<Props> = ({ brandInfo, queries, docId, onReset, ini
   return (
     <div className="space-y-12 animate-in fade-in duration-700">
       <div className="text-center space-y-2">
-        <h1 className="text-5xl font-black text-gray-900 tracking-tight">Brand Visibility Analysis</h1>
+        <h1 className="text-5xl font-black text-gray-900 mt-20 tracking-tight">Brand Visibility Analysis</h1>
         <p className="text-xl text-gray-500">
           Here's how <span className="text-indigo-600 font-bold">{brandInfo.name}</span> performs in AI search results
         </p>
