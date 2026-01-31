@@ -1,7 +1,7 @@
 
 import React, { useState, useRef } from 'react';
 import { BrandInput } from '../types';
-import { Building2, Globe, Tag, ChevronRight, Loader2, Sparkles, ArrowDown } from 'lucide-react';
+import { Building2, Globe, Tag, ChevronRight, Loader2, Sparkles, ArrowDown, FileText, Download } from 'lucide-react';
 
 interface Props {
   onSubmit: (data: BrandInput) => void;
@@ -10,6 +10,7 @@ interface Props {
 
 const Step1Form: React.FC<Props> = ({ onSubmit, loading }) => {
   const formRef = useRef<HTMLDivElement>(null);
+  const guideRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState<BrandInput>({
     name: '',
     domain: '',
@@ -27,6 +28,12 @@ const Step1Form: React.FC<Props> = ({ onSubmit, loading }) => {
     formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
+  const scrollToGuide = () => {
+    guideRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  const GUIDE_LINK = "https://drive.google.com/file/d/11U3zct2IVYYrDQ_-scclEXMUR0g0Exeh/view?usp=sharing";
+
   return (
     <div className="w-full flex flex-col">
       {/* Hero Section */}
@@ -39,22 +46,30 @@ const Step1Form: React.FC<Props> = ({ onSubmit, loading }) => {
             <p className="text-2xl md:text-3xl text-slate-500 font-medium leading-relaxed max-w-lg">
               Monitor your brand's AI visibility. Now powered by <span className="text-indigo-600 font-bold">Clevrr AI</span>.
             </p>
-            <div className="pt-4">
-              <button 
+            <div className="flex pt-4">
+              <button
                 onClick={scrollToForm}
                 className="px-10 py-5 bg-black text-white text-xl font-black rounded-xl hover:bg-slate-800 transition-all shadow-xl shadow-slate-200 active:scale-95 flex items-center gap-3"
               >
                 Get started
                 <ArrowDown className="w-6 h-6 animate-bounce" />
               </button>
+
+              <button
+                onClick={scrollToGuide}
+                className="mx-10 px-10 py-5 bg-clevrr-primary/80 text-white text-xl font-black rounded-xl hover:bg-slate-800 transition-all shadow-xl shadow-slate-200 active:scale-95 flex items-center gap-3"
+              >
+                View Guide
+                <Download className="w-6 h-6" />
+              </button>
             </div>
           </div>
-          
+
           <div className="relative animate-in fade-in zoom-in duration-1000 delay-200">
             <div className="absolute -inset-4 bg-indigo-500/10 blur-3xl rounded-full" />
-            <img 
-              src="https://cdn.prod.website-files.com/61bcbae3ae2e8ee49aa790b0/696ea81a618e073f6a7ac85b_ai-visibility-hero-img.png" 
-              alt="AI Visibility Hero" 
+            <img
+              src="https://cdn.prod.website-files.com/61bcbae3ae2e8ee49aa790b0/696ea81a618e073f6a7ac85b_ai-visibility-hero-img.png"
+              alt="AI Visibility Hero"
               className="relative w-full h-auto drop-shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-2xl"
             />
           </div>
@@ -62,7 +77,7 @@ const Step1Form: React.FC<Props> = ({ onSubmit, loading }) => {
       </section>
 
       {/* Form Section */}
-      <section ref={formRef} className="max-w-4xl mx-auto w-full px-6 py-24">
+      <section ref={formRef} className="max-w-4xl mx-auto w-full px-6 py-24 scroll-mt-20">
         <div className="bg-white rounded-[2.5rem] shadow-2xl shadow-indigo-100 border border-gray-100 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500">
           <div className="p-8 md:p-14">
             <div className="flex items-center gap-3 mb-6">
@@ -71,7 +86,7 @@ const Step1Form: React.FC<Props> = ({ onSubmit, loading }) => {
               </div>
               <h2 className="text-sm font-black text-indigo-600 uppercase tracking-widest">Brand Investigation Matrix</h2>
             </div>
-            
+
             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 tracking-tight leading-none">
               Analyze Your <span className="text-indigo-600">Search Presence</span>
             </h2>
@@ -142,7 +157,7 @@ const Step1Form: React.FC<Props> = ({ onSubmit, loading }) => {
               </div>
             </form>
           </div>
-          
+
           <div className="bg-gray-50 p-8 border-t border-gray-100 flex items-center justify-center gap-8">
             <div className="flex items-center gap-2 text-[10px] font-black text-gray-400 uppercase tracking-widest">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" /> Live Analysis
@@ -152,6 +167,31 @@ const Step1Form: React.FC<Props> = ({ onSubmit, loading }) => {
               <Globe className="w-4 h-4" /> 10+ AI Models Checked
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Hero Guide CTA Section */}
+      <section ref={guideRef} className="w-full bg-indigo-900 py-24 px-6 scroll-mt-20">
+        <div className="max-w-5xl mx-auto flex flex-col items-center text-center space-y-10">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-500/20 text-indigo-200 rounded-full text-xs font-black uppercase tracking-widest border border-indigo-400/30">
+            <FileText className="w-4 h-4" /> Exclusive Insight
+          </div>
+          <h2 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight">
+            How to rank your brand <br className="hidden md:block" />
+            on <span className="text-indigo-400">AI Visibility</span> Results?
+          </h2>
+          <p className="text-xl text-indigo-100 font-medium max-w-2xl leading-relaxed opacity-80">
+            Get the blueprint for dominating ChatGPT and Perplexity searches. Download our latest D2C guide by Clevrr AI.
+          </p>
+          <a
+            href={GUIDE_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-4 px-12 py-6 bg-white text-indigo-900 text-xl font-black rounded-2xl hover:bg-indigo-50 transition-all shadow-[0_0_40px_rgba(255,255,255,0.2)] transform hover:-translate-y-1 active:scale-95"
+          >
+            Download Ranking Guide
+            <Download className="w-6 h-6 group-hover:translate-y-0.5 transition-transform" />
+          </a>
         </div>
       </section>
     </div>
