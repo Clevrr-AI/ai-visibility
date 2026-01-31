@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Visibility Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      body { font-family: 'Inter', sans-serif; }
+      .markdown-content h1, .markdown-content h2, .markdown-content h3 { font-weight: 800; margin-top: 1rem; margin-bottom: 0.5rem; }
+      .markdown-content p { margin-bottom: 0.75rem; }
+      .markdown-content ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 0.75rem; }
+      .markdown-content strong { font-weight: 700; color: #111827; }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Host Grotesk', 'sans-serif'],
+              poppins: ['Poppins', 'sans-serif'],
+              cursive: ['Caveat', 'cursive'],
+            },
+            colors: {
+              clevrr: {
+                primary: '#2A51F4',   // Bright Blue
+                secondary: '#001C91', // Dark Navy
+                accent: '#5D5FEF',    // Purple/Indigo
+                pulse: '#5D5FEF',     // Pulse matches accent now
+              }
+            },
+            animation: {
+              'blob': 'blob 7s infinite',
+              'spin-slow': 'spin 4s linear infinite',
+              'radar-scan': 'scan 6s linear infinite',
+              'shimmer': 'shimmer 3s ease-in-out infinite alternate',
+              'ping-slow': 'ping 2s cubic-bezier(0, 0, 0.2, 1) infinite',
+            },
+            keyframes: {
+              blob: {
+                '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                '100%': { transform: 'translate(0px, 0px) scale(1)' },
+              },
+              scan: {
+                '0%': { transform: 'rotate(0deg)' },
+                '100%': { transform: 'rotate(360deg)' },
+              },
+              shimmer: {
+                '0%': { color: '#2A51F4' }, // Primary
+                '50%': { color: '#5D5FEF' }, // Accent
+                '100%': { color: '#2A51F4' } // Back to Primary
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        overflow-x: hidden;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .text-gradient-pulse {
+        background: linear-gradient(135deg, #2A51F4 0%, #a5b0ff 10%, #2A51F4 100%);
+        background-size: 200% auto;
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        animation: gradientMove 4s linear infinite;
+      }
+      .bg-gradient-vivid {
+        background: linear-gradient(135deg, #2A51F4 0%, #ff5f5f 100%);
+        background-size: 200% 200%;
+        animation: gradientMove 4s ease infinite;
+      }
+      .perspective-1000 { perspective: 1000px; }
+      .transform-style-3d { transform-style: preserve-3d; }
+      .rotate-x-12 { transform: rotateX(12deg); }
+      .rotate-x-20 { transform: rotateX(20deg); }
+      .backface-hidden { backface-visibility: hidden; }
+
+      @keyframes gradientMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+    </style>
+
+<link rel="stylesheet" href="/index.css">
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "recharts": "https://esm.sh/recharts@^3.7.0",
+    "react-markdown": "https://esm.sh/react-markdown@^9.0.0"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/ai-visibility/assets/index-CAkHzlMi.js"></script>
+</head>
+  <body class="bg-gray-50 text-gray-900">
+    <div id="root"></div>
+</body>
+</html>
