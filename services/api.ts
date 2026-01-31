@@ -1,7 +1,7 @@
 
 import { BrandInput, GenerateQueriesResponse, GetAnswerResponse, SendOtpResponse, VerifyOtpParams, GetAnswerParams, ReportData } from '../types';
 
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'https://brand-search-backend-617727402569.asia-south1.run.app';
 
 const HEADERS = {
   'Content-Type': 'application/json',
