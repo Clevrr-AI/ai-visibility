@@ -63,16 +63,13 @@ const Step3Results: React.FC<Props> = ({ brandInfo, queries, docId, onReset, ini
     let isMounted = true;
     analysisStartedRef.current = true;
 
-    const runSequentialAnalysis = async () => {
-      for (let i = 0; i < queries.length; i++) {
-        if (!isMounted) break;
-        // Proceed to next query only after current one finishes
-        await fetchQueryAnalysis(queries[i], i);
-      }
-      if (isMounted) setAnalysisFinished(true);
-    };
+    // Fire off all requests in sequence without awaiting each one
+    const promises = queries.map((query, i) => fetchQueryAnalysis(query, i));
 
-    runSequentialAnalysis();
+    // Wait for all to finish only to hide the general "Analysis in Progress" banner
+    Promise.all(promises).then(() => {
+      if (isMounted) setAnalysisFinished(true);
+    });
 
     return () => {
       isMounted = false;
@@ -194,7 +191,7 @@ const Step3Results: React.FC<Props> = ({ brandInfo, queries, docId, onReset, ini
           {queries.map((query, idx) => {
             const isAnalyzed = !!results[idx];
             const isLoading = loadingStates[idx];
-            const isWaiting = !isAnalyzed && !isLoading;
+            const isWaiting = !isAnalyzed && !isLoading && !analysisStartedRef.current;
 
             return (
               <AnalysisItemRow 
