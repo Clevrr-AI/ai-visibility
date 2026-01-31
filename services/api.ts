@@ -1,7 +1,7 @@
 
 import { BrandInput, GenerateQueriesResponse, GetAnswerResponse, SendOtpResponse, VerifyOtpParams, GetAnswerParams, ReportData } from '../types';
 
-const BASE_URL = 'https://141d09dfa02a.ngrok-free.app';
+const BASE_URL = 'http://localhost:8000';
 
 const HEADERS = {
   'Content-Type': 'application/json',

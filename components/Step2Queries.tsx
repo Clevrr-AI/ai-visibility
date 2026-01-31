@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BrandInput } from '../types';
 import { api } from '../services/api';
 import { 
@@ -89,55 +89,56 @@ const Step2Queries: React.FC<Props> = ({ initialQueries, onAnalysisStart, loadin
   };
 
   return (
-    <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="bg-white rounded-3xl mt-20 shadow-2xl shadow-indigo-100 border border-gray-100 overflow-hidden">
-        <div className="p-8 md:p-12">
+    <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 px-4 md:px-0">
+      <div className="bg-white rounded-3xl shadow-2xl shadow-indigo-100 border border-gray-100 overflow-hidden">
+        <div className="p-6 md:p-12">
           <div className="mb-10 text-center">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-green-50 text-green-600 rounded-full text-[10px] font-black mb-4 uppercase tracking-widest">
               <CheckCircle2 className="w-3.5 h-3.5" /> Intelligence Engine Ready
             </div>
             <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Review AI Search Intents</h2>
-            <p className="text-gray-500 max-w-lg mx-auto leading-relaxed">
+            <p className="text-gray-500 max-w-lg mx-auto leading-relaxed text-sm md:text-base">
               We generated these queries based on typical buyer behavior. Refine them before we trigger the real-time analysis.
             </p>
           </div>
 
-          <div className="space-y-3 mb-10">
+          <div className="space-y-4 mb-10">
             {queries.map((q, idx) => (
-              <div key={idx} className="flex items-center gap-4 p-4 bg-gray-50 border border-gray-200 rounded-2xl group hover:border-indigo-300 hover:bg-white transition-all shadow-sm">
-                <span className="flex-shrink-0 w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold text-xs">
-                  {idx + 1}
-                </span>
-                <input
-                  className="flex-grow bg-transparent font-semibold text-gray-700 focus:outline-none"
-                  value={q}
-                  onChange={(e) => {
-                    const updated = [...queries];
-                    updated[idx] = e.target.value;
-                    setQueries(updated);
-                  }}
-                />
-                <button 
-                  onClick={() => removeQuery(idx)}
-                  className="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-500 transition-all p-1.5 rounded-lg hover:bg-red-50"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </button>
-              </div>
+              <QueryRow 
+                key={idx} 
+                index={idx} 
+                value={q} 
+                onChange={(val) => {
+                  const updated = [...queries];
+                  updated[idx] = val;
+                  setQueries(updated);
+                }}
+                onRemove={() => removeQuery(idx)}
+              />
             ))}
 
-            <div className="flex gap-2">
-              <input
-                type="text"
+            <div className="flex flex-col sm:flex-row gap-3">
+              <textarea
+                rows={1}
                 placeholder="Add your own search intent..."
-                className="flex-grow px-5 py-4 bg-white border-2 border-dashed border-gray-200 rounded-2xl focus:border-indigo-500 focus:outline-none transition-all font-medium text-gray-600"
+                className="flex-grow px-5 py-4 bg-white border-2 border-dashed border-gray-200 rounded-2xl focus:border-indigo-500 focus:outline-none transition-all font-medium text-gray-600 resize-none overflow-hidden min-h-[58px]"
                 value={newQuery}
+                onInput={(e) => {
+                  const target = e.target as HTMLTextAreaElement;
+                  target.style.height = 'auto';
+                  target.style.height = target.scrollHeight + 'px';
+                }}
                 onChange={(e) => setNewQuery(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && addQuery()}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    addQuery();
+                  }
+                }}
               />
               <button
                 onClick={addQuery}
-                className="px-6 py-4 bg-gray-100 text-gray-600 rounded-2xl hover:bg-indigo-600 hover:text-white transition-all flex items-center gap-2 font-bold group"
+                className="h-[58px] sm:w-[58px] bg-gray-100 text-gray-600 rounded-2xl hover:bg-indigo-600 hover:text-white transition-all flex items-center justify-center font-bold group flex-shrink-0"
               >
                 <Plus className="w-5 h-5 group-hover:rotate-90 transition-transform" />
               </button>
@@ -165,7 +166,7 @@ const Step2Queries: React.FC<Props> = ({ initialQueries, onAnalysisStart, loadin
               <X className="w-5 h-5" />
             </button>
 
-            <div className="p-10 pt-12">
+            <div className="p-8 md:p-10 pt-12">
               <div className="flex items-center justify-center mb-8">
                 <div className="w-16 h-16 bg-white rounded-2xl shadow-xl shadow-indigo-100 flex items-center justify-center border border-indigo-50">
                   <ShieldCheck className="w-8 h-8 text-indigo-600" />
@@ -175,8 +176,8 @@ const Step2Queries: React.FC<Props> = ({ initialQueries, onAnalysisStart, loadin
               {modalStep === 'details' ? (
                 <div className="space-y-8">
                   <div className="text-center">
-                    <h3 className="text-3xl font-black text-gray-900 mb-2">Secure Your Report</h3>
-                    <p className="text-gray-500 text-lg">Verify your work email to unlock the growth analysis matrix.</p>
+                    <h3 className="text-2xl md:text-3xl font-black text-gray-900 mb-2">Secure Your Report</h3>
+                    <p className="text-gray-500 text-base md:text-lg">Verify your work email to unlock the growth analysis matrix.</p>
                   </div>
 
                   <form onSubmit={handleStartVerification} className="space-y-5">
@@ -225,7 +226,7 @@ const Step2Queries: React.FC<Props> = ({ initialQueries, onAnalysisStart, loadin
                           type="text"
                           maxLength={6}
                           placeholder="000000"
-                          className="w-56 text-center text-4xl font-black tracking-[0.4em] focus:ring-0 outline-none transition-all text-indigo-600 placeholder-indigo-100"
+                          className="w-full max-w-[200px] text-center text-3xl md:text-4xl font-black tracking-[0.4em] focus:ring-0 outline-none transition-all text-indigo-600 placeholder-indigo-100"
                           value={otp}
                           onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
                         />
@@ -271,6 +272,43 @@ const Step2Queries: React.FC<Props> = ({ initialQueries, onAnalysisStart, loadin
           </div>
         </div>
       )}
+    </div>
+  );
+};
+
+const QueryRow: React.FC<{ index: number; value: string; onChange: (val: string) => void; onRemove: () => void }> = ({ index, value, onChange, onRemove }) => {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const adjustHeight = () => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
+    }
+  };
+
+  useEffect(() => {
+    adjustHeight();
+  }, [value]);
+
+  return (
+    <div className="flex items-start gap-4 p-4 bg-gray-50 border border-gray-200 rounded-2xl group hover:border-indigo-300 hover:bg-white transition-all shadow-sm">
+      <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold text-xs mt-0.5">
+        {index + 1}
+      </span>
+      <textarea
+        ref={textareaRef}
+        rows={1}
+        className="flex-grow bg-transparent font-semibold text-gray-700 focus:outline-none resize-none overflow-hidden py-1.5"
+        value={value}
+        onInput={adjustHeight}
+        onChange={(e) => onChange(e.target.value)}
+      />
+      <button 
+        onClick={onRemove}
+        className="opacity-0 group-hover:opacity-100 md:opacity-0 sm:opacity-100 text-gray-400 hover:text-red-500 transition-all p-2 rounded-lg hover:bg-red-50 flex-shrink-0 mt-0.5"
+      >
+        <Trash2 className="w-4 h-4" />
+      </button>
     </div>
   );
 };

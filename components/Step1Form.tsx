@@ -62,7 +62,7 @@ const Step1Form: React.FC<Props> = ({ onSubmit, loading }) => {
       </section>
 
       {/* Form Section */}
-      <section ref={formRef} className="max-w-4xl mx-auto w-full px-6 py-24 scroll-mt-20">
+      <section ref={formRef} className="max-w-4xl mx-auto w-full px-6 py-24">
         <div className="bg-white rounded-[2.5rem] shadow-2xl shadow-indigo-100 border border-gray-100 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500">
           <div className="p-8 md:p-14">
             <div className="flex items-center gap-3 mb-6">
