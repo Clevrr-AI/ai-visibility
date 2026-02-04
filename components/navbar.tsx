@@ -71,37 +71,37 @@ const TOOLS = [
   {
     title: "Unit Economics Calculator",
     icon: Calculator,
-    href: "https://useclevrr.com/d2c-calculators"
+    href: "/d2c-calculators"
   },
   {
-    title: "Bundle Planner",
+    title: "Smart Bundle Planner",
     icon: PieChart,
-    href: "https://useclevrr.com/d2c-calculators/#bundles"
+    href: "/d2c-calculators/#bundles"
   },
   {
     title: "Marketing Budget Planner",
     icon: BarChart4,
-    href: "https://useclevrr.com/d2c-calculators/#marketing"
+    href: "/d2c-calculators/#marketing"
   },
   {
     title: "Runway Planner",
     icon: Hourglass,
-    href: "https://useclevrr.com/d2c-calculators/#runway"
+    href: "/d2c-calculators/#runway"
   },
   {
     title: "Inventory Stock Planner",
     icon: PackageCheck,
-    href: "https://useclevrr.com/d2c-calculators/#inventory"
+    href: "/d2c-calculators/#inventory"
   },
   {
     title: "RTO Simulator",
     icon: AlertTriangle,
-    href: "https://useclevrr.com/d2c-calculators/#rto"
+    href: "/d2c-calculators/#rto"
   },
   {
     title: "AI Search Visibility",
     icon: Search,
-    href: "https://useclevrr.com/ai-visibility"
+    href: "/ai-visibility"
   }
 ];
 
@@ -122,9 +122,9 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`z-50 transition-all duration-300 ${isScrolled ? "fixed top-0 left-0 right-0 bg-white border-b border-slate-200 shadow-sm" : mobileMenuOpen || activeDropdown
-          ? "bg-white border-b border-slate-200 shadow-sm"
-          : "bg-white/80 backdrop-blur-md border-b border-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled || mobileMenuOpen || activeDropdown
+        ? "bg-white border-b border-slate-200 shadow-sm"
+        : "bg-white/80 backdrop-blur-md border-b border-transparent"
         }`}
       onMouseLeave={() => setActiveDropdown(null)}
     >
@@ -172,10 +172,10 @@ const Navbar: React.FC = () => {
             </div>
 
             {/* Direct Links */}
-            <a href="https://blog.getclevrr.com" className="px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
+            <a href="/blog" className="px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
               Blogs
             </a>
-            <a href="https://getclevrr.com/integrations" className="px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
+            <a href="/integrations" className="px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
               Integrations
             </a>
 
@@ -186,7 +186,7 @@ const Navbar: React.FC = () => {
         <div className='flex'>
           <div className="flex items-center gap-3 me-5 md:gap-4">
             <a
-              href="https://useclevrr.com/ai-visibility"
+              href="/ai-visibility"
               className="flex items-center gap-2 bg-clevrr-secondary hover:bg-clevrr-primary text-white px-3 py-2 md:px-5 md:py-2.5 rounded-lg text-xs md:text-sm font-medium transition-all shadow-lg shadow-clevrr-primary/20 hover:shadow-clevrr-primary/40 hover:-translate-y-0.5 whitespace-nowrap"
             >
               AI Visibility
@@ -335,9 +335,8 @@ const Navbar: React.FC = () => {
               </div>
 
               {/* Mobile Links */}
-              <a href="https://blog.getclevrr.com" className="block px-4 py-4 text-slate-700 font-medium hover:bg-slate-50 border-b border-slate-100">Blogs</a>
-              <a href="https://getclevrr.com/integrations" className="block px-4 py-4 text-slate-700 font-medium hover:bg-slate-50 border-b border-slate-100">Integrations</a>
-
+              <a href="/blog" className="block px-4 py-4 text-slate-700 font-medium hover:bg-slate-50 border-b border-slate-100">Blogs</a>
+              <a href="/integrations" className="block px-4 py-4 text-slate-700 font-medium hover:bg-slate-50 border-b border-slate-100">Integrations</a>
             </div>
           </motion.div>
         )}
