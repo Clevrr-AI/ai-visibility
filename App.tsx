@@ -108,7 +108,7 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navbar />
 
-      <main className={`flex-grow ${step === Step.INPUT && !loading ? 'pb-20' : 'flex items-center justify-center p-4 md:p-12'} relative`}>
+      <main className={`my-20 flex-grow ${step === Step.INPUT && !loading ? 'pb-20' : 'flex items-center justify-center p-4 md:p-12'} relative`}>
         {error && (
           <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 w-full max-w-md p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl shadow-lg flex items-center gap-3">
             <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
