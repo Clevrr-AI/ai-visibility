@@ -32,7 +32,7 @@ const Step1Form: React.FC<Props> = ({ onSubmit, loading }) => {
     guideRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  const GUIDE_LINK = "https://drive.google.com/file/d/11U3zct2IVYYrDQ_-scclEXMUR0g0Exeh/view?usp=sharing";
+  const GUIDE_LINK = "https://rzp.io/rzp/ai-visibility";
 
   return (
     <div className="w-full flex flex-col">
